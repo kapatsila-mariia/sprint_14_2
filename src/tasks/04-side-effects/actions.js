@@ -15,12 +15,18 @@ export function amountRequestFailed(error) {
 
 export function incrementThreeTimes() {
     return (dispatch) => {
+        for (let i = 0; i < 3; i++) {
+            dispatch({type: 'INCREMENT'})
+        }
         // TODO This thunk needs to dispatch `"INCREMENT"` three times in a row
     }
 }
 
 export function dispatchIncrementIfEven() {
     return (dispatch, getState) => {
+        if (getState().counter % 2 === 0){
+            dispatch({type: 'INCREMENT'});
+        }
         // TODO This thunk needs to dispatch `"INCREMENT"`, but only if `state.counter` is even
     }
 }
