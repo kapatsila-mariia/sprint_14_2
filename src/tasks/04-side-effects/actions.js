@@ -33,7 +33,13 @@ export function dispatchIncrementIfEven() {
 
 
 export function fetchAndLoadAmount() {
-    return (dispatch) => {
+    return async (dispatch) => {
+      try {
+        await fetchAmount()
+        dispatch({type: 'AMOUNT_REQUEST_SUCCEEDED'})
+      } catch (error){
+        dispatch({type: 'AMOUNT_REQUEST_FAILED', error})
+      }
         // TODO This thunk needs to call the `fetchAmount()` API function imported above, and handle
         // TODO the promise it returns.  If the promise succeeds, the thunk should dispatch `requestAmountSucceeded()`
         // TODO with the returned amount.  If it fails, dispatch `requestAmountFailed()` instead with the error.
